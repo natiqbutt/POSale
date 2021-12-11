@@ -1,11 +1,12 @@
 ﻿@model POSale.Models.Customer
 
 @{
-    ViewData["Title"] = "Customerdetail";
+    ViewData["Title"] = "DeleteCustomer";
 }
 
-<h1>Customerdetail</h1>
+<h1>DeleteCustomer</h1>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Customer</h4>
     <hr />
@@ -59,10 +60,10 @@
             @Html.DisplayFor(model => model.CustomerDateOfBirth)
         </dd>
     </dl>
+    
+    <form asp-action="DeleteCustomer">
+        <input type="hidden" asp-for="CustomerId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.CustomerId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-
-

@@ -79,7 +79,7 @@ else if (ViewBag.EMessage != null)
                 <td>
                     <a asp-action="EditCustomer" asp-route-id="@item.CustomerId" class="btn btn-info btn-sm">Edit</a> |
                     <a asp-action="Customerdetail" asp-route-id="@item.CustomerId" class="btn btn-success btn-sm">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CustomerId" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-action="DeleteCustomer" asp-route-id="@item.CustomerId" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         }

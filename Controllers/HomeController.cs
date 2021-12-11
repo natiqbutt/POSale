@@ -102,17 +102,26 @@ namespace POSale.Controllers
             }
             return View();
         }
-        public IActionResult DeleteCustomer()
+        [HttpGet]
+        public IActionResult DeleteCustomer(int id)
+        {
+            Customer delcust = _dbcontext.Customers.Find(id);
+            return View(delcust);
+        }
+        [HttpPost]
+        public IActionResult DeleteCustomer(Customer customer)
         {
             try
             {
-                
+                _dbcontext.Customers.Remove(customer);
+                _dbcontext.SaveChanges();
+                TempData["SMessage"] = "Customer Deleted Succesfully.";
             }
             catch (Exception ex)
             {
-
+                TempData["EMessage"] = "Some Error Occuried While Deleting Please Try Again!!";
             }
-            return View();
+            return RedirectToAction(nameof(HomeController.AllCustomer), new { customer.CustomerId });
         }
     }
 }
