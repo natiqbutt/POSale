@@ -9,7 +9,6 @@ namespace POSale.Models
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public string ProductCatName { get; set; }
         public string Brand { get; set; }
         public int ProductCode { get; set; }
         public string ProductSerial { get; set; }
