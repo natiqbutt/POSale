@@ -4,6 +4,10 @@
     ViewData["Title"] = "AllCustomer";
 }
 
+<link href="~\css\jquery.dataTables.css" rel="stylesheet" />
+
+
+
 <h1>AllCustomer</h1>
 
 @if (ViewBag.SMessage != null)
@@ -18,7 +22,7 @@ else if (ViewBag.EMessage != null)
 <p>
     <a asp-action="Create" class="btn btn-outline-primary">Add New</a>
 </p>
-<table class="table table-responsive">
+<table class="table table-responsive" id="tablejq">
     <thead>
         <tr>
             <th>
@@ -85,3 +89,17 @@ else if (ViewBag.EMessage != null)
         }
     </tbody>
 </table>
+@section scripts{
+    <script src="~/js/dataTables.dataTables.js"></script>
+    <script type="text/javascript" src="~/js/JavaScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tablejq").DataTable({
+                sorting: false,
+            });
+
+        });
+    </script>
+
+
+}

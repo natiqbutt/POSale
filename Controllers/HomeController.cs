@@ -102,18 +102,12 @@ namespace POSale.Controllers
             }
             return View();
         }
-        [HttpGet]
         public IActionResult DeleteCustomer(int id)
         {
             Customer delcust = _dbcontext.Customers.Find(id);
-            return View(delcust);
-        }
-        [HttpPost]
-        public IActionResult DeleteCustomer(Customer customer)
-        {
             try
             {
-                _dbcontext.Customers.Remove(customer);
+                var delCust = _dbcontext.Customers.Remove(delcust);
                 _dbcontext.SaveChanges();
                 TempData["SMessage"] = "Customer Deleted Succesfully.";
             }
@@ -121,7 +115,7 @@ namespace POSale.Controllers
             {
                 TempData["EMessage"] = "Some Error Occuried While Deleting Please Try Again!!";
             }
-            return RedirectToAction(nameof(HomeController.AllCustomer), new { customer.CustomerId });
+            return RedirectToAction(nameof(HomeController.AllCustomer));
         }
     }
 }
