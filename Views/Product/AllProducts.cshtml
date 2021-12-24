@@ -82,9 +82,9 @@ else if (ViewBag.EMessage != null)
                     @Html.DisplayFor(modelItem => item.ModifyDate)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-info btn-sm">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-success btn-sm">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-action="EditProduct" asp-route-id="@item.ProductId" class="btn btn-info btn-sm">Edit</a> |
+                    <a asp-action="DetailProduct" asp-route-id="@item.ProductId" class="btn btn-success btn-sm">Details</a> |
+                    <a asp-action="DeleteProduct" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         }

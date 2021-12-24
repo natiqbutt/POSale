@@ -7,65 +7,63 @@ using System.Threading.Tasks;
 
 namespace POSale.Controllers
 {
-    public class ProductController : Controller
+    public class CategoryController : Controller
     {
         private readonly POSaleContext _dbcontext;
-        public ProductController(POSaleContext dbcontext)
+        public CategoryController(POSaleContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
-
         [HttpGet]
-        public IActionResult AddProduct()
+        public IActionResult AddCategory()
         {
-            ViewBag.ListCategories = _dbcontext.Categories.ToList();
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(Product pro)
+        public IActionResult AddCategory(Category cat)
         {
             try
             {
-                _dbcontext.Products.Add(pro);
+                _dbcontext.Categories.Add(cat);
                 _dbcontext.SaveChanges();
-                TempData["SMessage"] = "Product Added Succesfully.";
+                TempData["SMessage"] = "Category Added Succesfully.";
             }
             catch (Exception ex)
             {
                 TempData["EMessage"] = "Some Error Occuried While Adding Please Try Again!!";
             }
 
-            return RedirectToAction(nameof(ProductController.AllProducts));
+            return RedirectToAction(nameof(CategoryController.AllCategories));
         }
-        public IActionResult AllProducts()
+        public IActionResult AllCategories()
         {
             ViewBag.SMessage = TempData["SMessage"];
             ViewBag.EMessage = TempData["EMessage"];
-            IList<Product> IProduct = _dbcontext.Products.ToList();
-            return View(IProduct);
+            IList<Category> ICategory = _dbcontext.Categories.ToList();
+            return View(ICategory);
         }
         [HttpGet]
-        public IActionResult DetailProduct(int Id)
+        public IActionResult DetailCategory(int Id)
         {
             try
             {
-                Product product = _dbcontext.Products.Find(Id);
-                return View(product);
+                Category category = _dbcontext.Categories.Find(Id);
+                return View(category);
             }
             catch (Exception)
             {
                 TempData["EMessage"] = "Some Error Occuried While Fatching Please Try Again!!";
-                return View();
             }
+            return RedirectToAction(nameof(CategoryController.AllCategories));
         }
         [HttpGet]
-        public IActionResult EditProduct(int Id)
+        public IActionResult EditCategory(int Id)
         {
             try
             {
                 TempData["SMessage"] = "Product Editing Succesfully.";
-                Product product = _dbcontext.Products.Find(Id);
-                return View(product);
+                Category category = _dbcontext.Categories.Find(Id);
+                return View(category);
             }
             catch (Exception)
             {
@@ -74,11 +72,11 @@ namespace POSale.Controllers
             }
         }
         [HttpPost]
-        public IActionResult EditProduct(Product product)
+        public IActionResult EditCategory(Category cat)
         {
             try
             {
-                _dbcontext.Products.Update(product);
+                _dbcontext.Categories.Update(cat);
                 _dbcontext.SaveChanges();
                 TempData["SMessage"] = "Data Updated Successfully";
             }
@@ -86,18 +84,18 @@ namespace POSale.Controllers
             {
                 TempData["EMessage"] = "Some Error Occuried While Modifing Please Try Again!!";
             }
-            return RedirectToAction(nameof(ProductController.AllProducts), new { product.ProductId });
+            return RedirectToAction(nameof(CategoryController.AllCategories), new { cat.CategoryId });
         }
-        public IActionResult DeleteProduct(int id)
+        public IActionResult DeleteCategory(int id)
         {
             try
             {
-                var objCat = _dbcontext.Products.Find(id);
+                var objCat = _dbcontext.Categories.Find(id);
                 if (objCat != null)
                 {
-                    _dbcontext.Products.Remove(objCat);
+                    _dbcontext.Categories.Remove(objCat);
                     _dbcontext.SaveChanges();
-                    TempData["SMessage"] = "Deleted Successfully";
+                    TempData["SMessage"] = "Category Deleted Successfully";
                 }
                 else
                 {
@@ -108,7 +106,7 @@ namespace POSale.Controllers
             {
                 TempData["EMessage"] = "Some error occured";
             }
-            return RedirectToAction(nameof(ProductController.AllProducts));
+            return RedirectToAction(nameof(CategoryController.AllCategories));
         }
     }
 }
