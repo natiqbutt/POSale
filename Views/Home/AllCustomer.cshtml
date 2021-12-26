@@ -3,8 +3,7 @@
 @{
     ViewData["Title"] = "AllCustomer";
 }
-<link href="~/css/site.css" rel="stylesheet" />
-<link href="~\css\jquery.dataTables.css" rel="stylesheet" />
+<link href="~/css/datatables.min.css" rel="stylesheet" />
 
 <h1>AllCustomer</h1>
 
@@ -20,7 +19,7 @@ else if (ViewBag.EMessage != null)
 <p>
     <a asp-action="AddCustomer" class="btn btn-outline-primary">Add New</a>
 </p>
-<table class="table table-responsive text-nowrap" id="CustomerTable">
+<table class="table table-responsive text-nowrap" id="tbl-cust">
     <thead>
         <tr>
             <th>
@@ -87,14 +86,11 @@ else if (ViewBag.EMessage != null)
         }
     </tbody>
 </table>
-@section scripts{
-    <script src="~/js/jquery.dataTables.min.js"></script>
-    <script src="~/js/dataTables.bootstrap5.min.js"></script>
+@section Scripts{
+    <script type="text/javascript" src="~/js/datatables.min.js"></script>
     <script>
         $document.ready(function () {
-            $("#CustomerTable").DataTable({
-                sorting: false;
-            });
+            $("#tbl-cust").DataTable();
         });
     </script>
 }
