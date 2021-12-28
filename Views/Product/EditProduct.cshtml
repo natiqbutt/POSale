@@ -1,21 +1,21 @@
 ﻿@model POSale.Models.Product
 
 @{
-    ViewData["Title"] = "AddProduct";
-    IList<Category> Listcategories = ViewBag.ListCategories;
-    SelectList AllCategories = new SelectList(Listcategories, "CategoryId", "CategoryName");
+    ViewData["Title"] = "EditProduct";
 }
 
-<h1>AddProduct</h1>
+<h1>EditProduct</h1>
 
 <h4>Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddProduct">
+        <form asp-action="EditProduct">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProductId" />
             <div class="form-group">
-                @Html.DropDownListFor(model => model.ProductCategory, AllCategories, "Choose a Category", new { @class= "form-control inout-sm" })
+                <label asp-for="ProductCategory" class="control-label"></label>
+                <input asp-for="ProductCategory" class="form-control" />
                 <span asp-validation-for="ProductCategory" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -43,7 +43,7 @@
                 <input asp-for="ProductQuantity" class="form-control" />
                 <span asp-validation-for="ProductQuantity" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
                 <label asp-for="CreatedBy" class="control-label"></label>
                 <input asp-for="CreatedBy" class="form-control" />
                 <span asp-validation-for="CreatedBy" class="text-danger"></span>
@@ -62,17 +62,16 @@
                 <label asp-for="ModifyDate" class="control-label"></label>
                 <input asp-for="ModifyDate" class="form-control" />
                 <span asp-validation-for="ModifyDate" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary btn-sm" />
-                <input type="reset" value="Reset" class="btn btn-secondary btn-sm" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="AllProducts">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

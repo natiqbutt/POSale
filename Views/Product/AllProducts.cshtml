@@ -23,6 +23,9 @@ else if (ViewBag.EMessage != null)
             <th>
                 @Html.DisplayNameFor(model => model.ProductName)
             </th>
+            @*<th>
+                Product Catgeory
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Brand)
             </th>
@@ -53,40 +56,43 @@ else if (ViewBag.EMessage != null)
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductSerial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductQuantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifyBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifyDate)
-                </td>
-                <td>
-                    <a asp-action="EditProduct" asp-route-id="@item.ProductId" class="btn btn-info btn-sm">Edit</a> |
-                    <a asp-action="DetailProduct" asp-route-id="@item.ProductId" class="btn btn-success btn-sm">Details</a> |
-                    <a asp-action="DeleteProduct" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            @*<td>
+                <strong>@item.ProductCategory</strong>
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductSerial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifyBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifyDate)
+            </td>
+            <td>
+                <a asp-action="EditProduct" asp-route-id="@item.ProductId" class="btn btn-info btn-sm">Edit</a> |
+                <a asp-action="DetailProduct" asp-route-id="@item.ProductId" class="btn btn-success btn-sm">Details</a> |
+                <a asp-action="DeleteProduct" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

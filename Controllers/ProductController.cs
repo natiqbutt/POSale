@@ -26,6 +26,12 @@ namespace POSale.Controllers
         {
             try
             {
+                if (pro.ProductCategory == null)
+                {
+                    pro.ProductCategory = 0;
+                }
+                pro.CreatedBy = "Theta";
+                pro.CreatedDate = DateTime.Now;
                 _dbcontext.Products.Add(pro);
                 _dbcontext.SaveChanges();
                 TempData["SMessage"] = "Product Added Succesfully.";
@@ -39,10 +45,18 @@ namespace POSale.Controllers
         }
         public IActionResult AllProducts()
         {
-            ViewBag.SMessage = TempData["SMessage"];
-            ViewBag.EMessage = TempData["EMessage"];
-            IList<Product> IProduct = _dbcontext.Products.ToList();
-            return View(IProduct);
+            try
+            {
+                ViewBag.SMessage = TempData["SMessage"];
+                ViewBag.EMessage = TempData["EMessage"];
+                IList<Product> IProduct = _dbcontext.Products.ToList();
+                return View(IProduct);
+            }
+            catch
+            {
+                ViewBag.EMessage = "Error occurs while fatching data.";
+            }
+            return View();
         }
         [HttpGet]
         public IActionResult DetailProduct(int Id)
@@ -78,6 +92,8 @@ namespace POSale.Controllers
         {
             try
             {
+                product.ModifyBy = "System";
+                product.ModifyDate = DateTime.Now;
                 _dbcontext.Products.Update(product);
                 _dbcontext.SaveChanges();
                 TempData["SMessage"] = "Data Updated Successfully";

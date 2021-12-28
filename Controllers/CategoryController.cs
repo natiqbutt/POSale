@@ -17,6 +17,7 @@ namespace POSale.Controllers
         [HttpGet]
         public IActionResult AddCategory()
         {
+            ViewBag.ListCategory = _dbcontext.Categories.ToList();
             return View();
         }
         [HttpPost]
