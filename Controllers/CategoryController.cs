@@ -51,7 +51,7 @@ namespace POSale.Controllers
                 Category category = _dbcontext.Categories.Find(Id);
                 return View(category);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 TempData["EMessage"] = "Some Error Occuried While Fatching Please Try Again!!";
             }
@@ -66,7 +66,7 @@ namespace POSale.Controllers
                 Category category = _dbcontext.Categories.Find(Id);
                 return View(category);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 TempData["EMessage"] = "Some Error Occuried While Modifing Please Try Again!!";
                 return View();

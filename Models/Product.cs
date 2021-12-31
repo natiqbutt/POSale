@@ -8,7 +8,6 @@ namespace POSale.Models
     public partial class Product
     {
         public int ProductId { get; set; }
-        public int? ProductCategory { get; set; }
         public string ProductName { get; set; }
         public string Brand { get; set; }
         public int ProductCode { get; set; }
@@ -18,5 +17,6 @@ namespace POSale.Models
         public DateTime CreatedDate { get; set; }
         public string ModifyBy { get; set; }
         public DateTime ModifyDate { get; set; }
+        public int? ProductCategory { get; set; }
     }
 }

@@ -30,10 +30,11 @@ namespace POSale.Controllers
                 {
                     pro.ProductCategory = 0;
                 }
-                pro.CreatedBy = "Theta";
+                pro.CreatedBy = "System";
                 pro.CreatedDate = DateTime.Now;
                 _dbcontext.Products.Add(pro);
                 _dbcontext.SaveChanges();
+                
                 TempData["SMessage"] = "Product Added Succesfully.";
             }
             catch (Exception ex)
@@ -52,7 +53,7 @@ namespace POSale.Controllers
                 IList<Product> IProduct = _dbcontext.Products.ToList();
                 return View(IProduct);
             }
-            catch
+            catch(Exception ex)
             {
                 ViewBag.EMessage = "Error occurs while fatching data.";
             }
@@ -66,7 +67,7 @@ namespace POSale.Controllers
                 Product product = _dbcontext.Products.Find(Id);
                 return View(product);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 TempData["EMessage"] = "Some Error Occuried While Fatching Please Try Again!!";
                 return View();
@@ -81,7 +82,7 @@ namespace POSale.Controllers
                 Product product = _dbcontext.Products.Find(Id);
                 return View(product);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 TempData["EMessage"] = "Some Error Occuried While Modifing Please Try Again!!";
                 return View();

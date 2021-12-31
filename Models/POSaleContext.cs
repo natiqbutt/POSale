@@ -107,6 +107,8 @@ namespace POSale.Models
 
                 entity.Property(e => e.ModifyDate).HasColumnType("datetime");
 
+                entity.Property(e => e.ProductCategory).HasMaxLength(30);
+
                 entity.Property(e => e.ProductName)
                     .IsRequired()
                     .HasMaxLength(30);
@@ -118,6 +120,8 @@ namespace POSale.Models
 
             modelBuilder.Entity<Vendor>(entity =>
             {
+                entity.Property(e => e.VendorId).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.VendorAddress)
                     .IsRequired()
                     .HasMaxLength(30);
@@ -141,6 +145,12 @@ namespace POSale.Models
                 entity.Property(e => e.VendorUsername)
                     .IsRequired()
                     .HasMaxLength(30);
+
+                entity.HasOne(d => d.VendorNavigation)
+                    .WithOne(p => p.Vendor)
+                    .HasForeignKey<Vendor>(d => d.VendorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Vendors_Customers");
             });
 
             OnModelCreatingPartial(modelBuilder);
