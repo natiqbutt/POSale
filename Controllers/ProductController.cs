@@ -26,22 +26,20 @@ namespace POSale.Controllers
         {
             try
             {
-                if (pro.ProductCategory == null)
+                if(pro.ProductCategory == null)
                 {
-                    pro.ProductCategory = 0;
+                    pro.ProductCategory= 0;
                 }
                 pro.CreatedBy = "System";
                 pro.CreatedDate = DateTime.Now;
                 _dbcontext.Products.Add(pro);
                 _dbcontext.SaveChanges();
-                
                 TempData["SMessage"] = "Product Added Succesfully.";
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 TempData["EMessage"] = "Some Error Occuried While Adding Please Try Again!!";
             }
-
             return RedirectToAction(nameof(ProductController.AllProducts));
         }
         public IActionResult AllProducts()
