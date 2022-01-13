@@ -42,13 +42,23 @@ namespace POSale.Controllers
             }
             return RedirectToAction(nameof(ProductController.AllProducts));
         }
+        [HttpGet]
         public IActionResult AllProducts()
         {
             try
             {
                 ViewBag.SMessage = TempData["SMessage"];
                 ViewBag.EMessage = TempData["EMessage"];
-                IList<Product> IProduct = _dbcontext.Products.ToList();
+                IList<ProductView> IProduct = (from product in _dbcontext.Products
+                                           from category in _dbcontext.Categories.Where(m => m.CategoryId == product.ProductCategory).DefaultIfEmpty()
+                                           select new ProductView
+                                           {
+                                               ProductName = product.ProductName,
+                                               ProductCode = product.ProductCode,
+                                               CategoryName = category.CategoryName,
+                                               CategoryCode = category.CategoryCode,
+                                               ProductQuantity = (double?)product.ProductQuantity ?? 0,
+                                           }).ToList();
                 return View(IProduct);
             }
             catch(Exception ex)

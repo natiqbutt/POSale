@@ -15,7 +15,5 @@ namespace POSale.Models
         public string VendorAddress { get; set; }
         public string VendorFeedback { get; set; }
         public DateTime VendorDateOfBirth { get; set; }
-
-        public virtual Customer VendorNavigation { get; set; }
     }
 }

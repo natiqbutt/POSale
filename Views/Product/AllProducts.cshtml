@@ -1,8 +1,10 @@
-﻿@model IEnumerable<POSale.Models.Product>
+﻿@model IEnumerable<POSale.Models.ProductView>
 
 @{
     ViewData["Title"] = "AllProducts";
 }
+<link href="~/css/datatables.min.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
 
 <h1>AllProducts</h1>
 
@@ -17,28 +19,28 @@ else if (ViewBag.EMessage != null)
 <p>
     <a asp-action="AddProduct" class="btn btn-primary btn-sm">Create New</a>
 </p>
-<table class="table table-responsive text-nowrap">
+<table class="table table-responsive text-nowrap" id="tbl-cust">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ProductName)
             </th>
-            @*<th>
-                Product Catgeory
-            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayNameFor(model => model.CategoryName)
             </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ProductCode)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ProductSerial)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ProductQuantity)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.CreatedBy)
             </th>
             <th>
@@ -49,50 +51,58 @@ else if (ViewBag.EMessage != null)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ModifyDate)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            @*<td>
-                <strong>@item.ProductCategory</strong>
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductSerial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifyBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifyDate)
-            </td>
-            <td>
-                <a asp-action="EditProduct" asp-route-id="@item.ProductId" class="btn btn-info btn-sm">Edit</a> |
-                <a asp-action="DetailProduct" asp-route-id="@item.ProductId" class="btn btn-success btn-sm">Details</a> |
-                <a asp-action="DeleteProduct" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.ProductSerial)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQuantity)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifyBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifyDate)
+                </td>*@
+                <td>
+                    <a asp-action="EditProduct" asp-route-id="@item.ProductId" class="btn btn-info btn-sm">Edit</a> |
+                    <a asp-action="DetailProduct" asp-route-id="@item.ProductId" class="btn btn-success btn-sm">Details</a> |
+                    <a asp-action="DeleteProduct" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+@section Scripts{
+    <script type="text/javascript" src="~/js/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tbl-cust").DataTable();
+        });
+    </script>
+}

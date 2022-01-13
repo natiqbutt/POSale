@@ -21,15 +21,17 @@ namespace POSale.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<SaleLine> SaleLines { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-71PMDI8\\SQLEXPRESS;Database=POSale;Trusted_Connection=True;");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("Server=DESKTOP-71PMDI8\\SQLEXPRESS;Database=POSale;Trusted_Connection=True;");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +39,14 @@ namespace POSale.Models
 
             modelBuilder.Entity<Category>(entity =>
             {
+                entity.Property(e => e.CategoryCode)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.CategoryLevel)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
                 entity.Property(e => e.CategoryName)
                     .IsRequired()
                     .HasMaxLength(30);
@@ -51,9 +61,7 @@ namespace POSale.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifyBy)
-                    .IsRequired()
-                    .HasMaxLength(30);
+                entity.Property(e => e.ModifyBy).HasMaxLength(30);
 
                 entity.Property(e => e.ModifyDate).HasColumnType("datetime");
             });
@@ -101,13 +109,13 @@ namespace POSale.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ModifyBy)
-                    .IsRequired()
-                    .HasMaxLength(30);
+                entity.Property(e => e.ModifyBy).HasMaxLength(30);
 
                 entity.Property(e => e.ModifyDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ProductCategory).HasMaxLength(30);
+                entity.Property(e => e.ProductCode)
+                    .IsRequired()
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.ProductName)
                     .IsRequired()
@@ -145,12 +153,6 @@ namespace POSale.Models
                 entity.Property(e => e.VendorUsername)
                     .IsRequired()
                     .HasMaxLength(30);
-
-                entity.HasOne(d => d.VendorNavigation)
-                    .WithOne(p => p.Vendor)
-                    .HasForeignKey<Vendor>(d => d.VendorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Vendors_Customers");
             });
 
             OnModelCreatingPartial(modelBuilder);

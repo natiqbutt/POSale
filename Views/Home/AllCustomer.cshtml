@@ -4,7 +4,7 @@
     ViewData["Title"] = "AllCustomer";
 }
 <link href="~/css/datatables.min.css" rel="stylesheet" />
-
+<link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
 <h1>AllCustomer</h1>
 
 @if (ViewBag.SMessage != null)
@@ -86,11 +86,11 @@ else if (ViewBag.EMessage != null)
         }
     </tbody>
 </table>
-@*@section Scripts{
+@section Scripts{
     <script type="text/javascript" src="~/js/datatables.min.js"></script>
     <script>
-        $document.ready(function () {
+        $(document).ready(function () {
             $("#tbl-cust").DataTable();
         });
     </script>
-}*@
+}

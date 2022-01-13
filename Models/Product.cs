@@ -10,13 +10,13 @@ namespace POSale.Models
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public string Brand { get; set; }
-        public int ProductCode { get; set; }
+        public string ProductCode { get; set; }
         public string ProductSerial { get; set; }
-        public int ProductQuantity { get; set; }
+        public double ProductQuantity { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifyBy { get; set; }
-        public DateTime ModifyDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
         public int? ProductCategory { get; set; }
     }
 }

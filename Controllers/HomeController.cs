@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using POSale.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace POSale.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly POSaleContext _dbcontext;
+
         public HomeController(ILogger<HomeController> logger, POSaleContext dbcontext)
         {
             _logger = logger;
@@ -35,8 +38,12 @@ namespace POSale.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        #endregion 
-
+        #endregion
+        public IActionResult login()
+        {
+            return View();
+        }
+        #region Add Customer
         [HttpGet]
         public IActionResult AddCustomer()
         {
@@ -117,5 +124,53 @@ namespace POSale.Controllers
             }
             return RedirectToAction(nameof(HomeController.AllCustomer));
         }
+        #endregion
+
+        #region Sale Managment
+        [HttpGet]
+        public ActionResult AddSale() 
+        {
+            ViewBag.SMeesage = TempData["SMessage"];
+            ViewBag.EMessage = TempData["EMessage"];
+            ViewBag.ListProduct = _dbcontext.Products.ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddSale(string objData)
+        {
+            try
+            {
+                ViewSales ObjMain = JsonConvert.DeserializeObject<ViewSales>(objData, new IsoDateTimeConverter());
+                var exSale = _dbcontext.Sales.OrderByDescending(m => m.Id).FirstOrDefault();
+                var serial = 0;
+                if (exSale != null)
+                {
+                    serial = exSale.Serial + 1;
+                }
+                ObjMain.ObjSale.Serial = serial;
+                ObjMain.ObjSale.Code = "Sale/" + ObjMain.ObjSale.SaleDate.Month.ToString() + "/" + ObjMain.ObjSale.SaleDate.Year.ToString() + "/" + serial.ToString("000");
+
+                ObjMain.ObjSale.CreatedBy = "System";
+                ObjMain.ObjSale.CreatedDate = DateTime.Now;
+                _dbcontext.Sales.Add(ObjMain.ObjSale);
+                _dbcontext.SaveChanges();
+                foreach (SaleLine product in ObjMain.ListSaleLine)
+                {
+                    var SaleId = ObjMain.ObjSale.Id;
+                    product.SaleId = SaleId;
+                    product.CreatedBy = "System";
+                    product.CreatedDate = DateTime.Now;
+                    _dbcontext.SaleLines.Add(product);
+                    _dbcontext.SaveChanges();
+                }
+                TempData["SMessage"] = "Data Updated Successfully";
+            }
+            catch (Exception ex)
+            {
+                TempData["EMessage"] = "Error occured While Updating Please Try Again!!";
+            }
+            return RedirectToAction(nameof(HomeController.AddSale));
+        }
+        #endregion
     }
 }

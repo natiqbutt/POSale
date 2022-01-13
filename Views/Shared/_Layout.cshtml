@@ -159,13 +159,13 @@
                                 <a class="nav-link" asp-controller="Home" asp-action="AllCustomer"><i class="fa fa-fw fa-user"></i>Customer<span class="badge badge-success">6</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Category" asp-action="AllCategory"><i class="fa fa-fw fa-user"></i>Customer<span class="badge badge-success">6</span></a>
+                                <a class="nav-link" asp-controller="Category" asp-action="AllCategories"><i class="fa fa-fw fa-book"></i>All Categories<span class="badge badge-success">6</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Product" asp-action="AllCustomer"><i class="fa fa-fw fa-user"></i>Customer<span class="badge badge-success">6</span></a>
+                                <a class="nav-link" asp-controller="Product" asp-action="AllProducts"><i class="fa fa-fw fa-book"></i>AllProducts<span class="badge badge-success">6</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="AllCustomer"><i class="fa fa-fw fa-user"></i>Customer<span class="badge badge-success">6</span></a>
+                                <a class="nav-link" asp-controller="Home" asp-action="AddSale"><i class="fa fa-fw fa-dollar-sign"></i>Sale Product<span class="badge badge-success">6</span></a>
                             </li>
                             <li class="nav-divider">
                                 Features
@@ -183,8 +183,8 @@
                                 <a class="nav-link" href="#" data-toggle="" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="fas fa-fw fa-map-marker-alt"></i>Maps</a>
                             </li>
                             @*<li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-10" aria-controls="submenu-10"><i class="fas fa-f fa-folder"></i>Menu Level</a>
-            </li>*@
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-10" aria-controls="submenu-10"><i class="fas fa-f fa-folder"></i>Menu Level</a>
+                                </li>*@
                         </ul>
                     </div>
                 </nav>
@@ -218,7 +218,7 @@
                     </div>
                 </div>
 
-                <div class="container">
+                <div class="container .table thead th, .table th">
                     <main role="main" class="pb-3">
                         @RenderBody()
                     </main>
@@ -274,6 +274,7 @@
     <script src="~/assets/vendor/charts/sparkline/spark-js.js"></script>
     <!-- dashboard sales js-->
     <script src="~/assets/libs/js/dashboard-sales.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
  
 </html>

@@ -16,7 +16,5 @@ namespace POSale.Models
         public string CustomerPhone { get; set; }
         public string CustomerAddress { get; set; }
         public DateTime CustomerDateOfBirth { get; set; }
-
-        public virtual Vendor Vendor { get; set; }
     }
 }

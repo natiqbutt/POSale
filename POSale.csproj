@@ -67,7 +67,9 @@
     <None Include="wwwroot\assets\vendor\bootstrap-colorpicker\jquery-asGradient\dist\jquery-asGradient.js" />
     <None Include="wwwroot\assets\vendor\bootstrap-select\css\bootstrap-select.css" />
     <None Include="wwwroot\assets\vendor\bootstrap-select\js\bootstrap-select.js" />
-    <None Include="wwwroot\assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\assets\vendor\bootstrap\css\bootstrap.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="wwwroot\assets\vendor\bootstrap\js\bootstrap.bundle.js" />
     <None Include="wwwroot\assets\vendor\charts\c3charts\c3.css" />
     <None Include="wwwroot\assets\vendor\charts\c3charts\c3.min.js" />
@@ -479,6 +481,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.12" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
