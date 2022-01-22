@@ -18,6 +18,7 @@ namespace POSale.Models
         public DateTime CreatedDate { get; set; }
         public string ModifyBy { get; set; }
         public DateTime ModifyDate { get; set; }
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string CategoryCode { get; set; }
     }

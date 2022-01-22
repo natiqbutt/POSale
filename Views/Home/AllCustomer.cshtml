@@ -52,7 +52,7 @@ else if (ViewBag.EMessage != null)
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="parentitem">
                 <td>
                     @Html.DisplayFor(modelItem => item.CustomerName)
                 </td>
@@ -78,19 +78,74 @@ else if (ViewBag.EMessage != null)
                     @Html.DisplayFor(modelItem => item.CustomerDateOfBirth)
                 </td>
                 <td>
+                    <input type="hidden" id="id" value="@item.CustomerId" />
                     <a asp-action="EditCustomer" asp-route-id="@item.CustomerId" class="btn btn-info btn-sm">Edit</a> |
                     <a asp-action="Customerdetail" asp-route-id="@item.CustomerId" class="btn btn-success btn-sm">Details</a> |
-                    <a asp-action="DeleteCustomer" asp-route-id="@item.CustomerId" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="#" data-toggle="#myModal" class="btn btn-danger btn-sm btndelete">remove</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Delete Customer</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure ? You want to delete this. </h4>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-success" onclick="ConfirmDelete()">Confirm</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 @section Scripts{
     <script type="text/javascript" src="~/js/datatables.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#tbl-cust").DataTable();
+        });
+    </script>
+
+    <script>
+
+        var ConfirmDelete = function (Id) {
+
+            $("#id").val(Id);
+
+        }
+
+
+        $(document).on("click", ".btndelete", function () {
+
+            var closestdiv = $(this).closest(".parentitem");
+            var Id = closestdiv.find("#id").val();
+
+            $.ajax({
+
+                type: "GET",
+                url: "/Home/DeleteCustomer",
+                data: { Id: Id },
+                success: function (result) {
+                    $("#myModal").modal("hide");
+                    closestdiv.remove();
+
+                }
+
+            });
+
         });
     </script>
 }

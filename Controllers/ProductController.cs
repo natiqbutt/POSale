@@ -26,9 +26,9 @@ namespace POSale.Controllers
         {
             try
             {
-                if(pro.ProductCategory == null)
+                if (pro.ProductCategory == null)
                 {
-                    pro.ProductCategory= 0;
+                    pro.ProductCategory = 0;
                 }
                 pro.CreatedBy = "System";
                 pro.CreatedDate = DateTime.Now;
@@ -40,28 +40,31 @@ namespace POSale.Controllers
             {
                 TempData["EMessage"] = "Some Error Occuried While Adding Please Try Again!!";
             }
-            return RedirectToAction(nameof(ProductController.AllProducts));
+            //return RedirectToAction(nameof(ProductController.AllProducts));
+            return View();
         }
         [HttpGet]
         public IActionResult AllProducts()
         {
+            //_dbcontext.Products.Find();
             try
             {
                 ViewBag.SMessage = TempData["SMessage"];
                 ViewBag.EMessage = TempData["EMessage"];
                 IList<ProductView> IProduct = (from product in _dbcontext.Products
-                                           from category in _dbcontext.Categories.Where(m => m.CategoryId == product.ProductCategory).DefaultIfEmpty()
-                                           select new ProductView
-                                           {
-                                               ProductName = product.ProductName,
-                                               ProductCode = product.ProductCode,
-                                               CategoryName = category.CategoryName,
-                                               CategoryCode = category.CategoryCode,
-                                               ProductQuantity = (double?)product.ProductQuantity ?? 0,
-                                           }).ToList();
+                                               from category in _dbcontext.Categories.Where(m => m.CategoryId == product.ProductCategory).DefaultIfEmpty()
+                                               select new ProductView
+                                               {
+                                                   //CategoryId = category.CategoryId,
+                                                   ProductName = product.ProductName,
+                                                   ProductCode = product.ProductCode,
+                                                   CategoryName = category.CategoryName,
+                                                   CategoryCode = category.CategoryCode,
+                                                   ProductQuantity = (double?)product.ProductQuantity ?? 0,
+                                               }).ToList();
                 return View(IProduct);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.EMessage = "Error occurs while fatching data.";
             }
