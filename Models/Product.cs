@@ -12,7 +12,7 @@ namespace POSale.Models
         public string Brand { get; set; }
         public string ProductCode { get; set; }
         public string ProductSerial { get; set; }
-        public double ProductQuantity { get; set; }
+        public int ProductQuantity { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifyBy { get; set; }

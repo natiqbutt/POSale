@@ -47,6 +47,7 @@ namespace POSale.Controllers
         [HttpGet]
         public IActionResult AddCustomer()
         {
+            ViewBag.CustomerList = _dbcontext.Customers.ToList();
             return View();
         }
         [HttpPost]
@@ -165,5 +166,88 @@ namespace POSale.Controllers
             return RedirectToAction(nameof(HomeController.AddSale));
         }
         #endregion
+
+        #region cards and Dashboard
+        [HttpGet]
+        public JsonResult CustomerCount()
+        {
+            try
+            {
+                var CustCount = _dbcontext.Customers.Count();
+                if (CustCount == null)
+                {
+                    CustCount = 0;
+                }
+                return Json(CustCount);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return Json(0);
+        }
+
+        [HttpGet]
+        public JsonResult ProductCount()
+        {
+            try
+            {
+                var ProCount = _dbcontext.Products.Count();
+                if (ProCount == null)
+                {
+                    ProCount = 0;
+                }
+                return Json(ProCount);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return Json(0);
+        }
+
+        [HttpGet]
+        public JsonResult CategoryCount()
+        {
+            try
+            {
+                var CatCount = _dbcontext.Categories.Count();
+                if (CatCount == null)
+                {
+                    CatCount = 0;
+                }
+                return Json(CatCount);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return Json(0);
+        }
+
+        [HttpGet]
+        public JsonResult VendorCount()
+        {
+            try
+            {
+                var VenCount = _dbcontext.Vendors.Count();
+                return Json(VenCount);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return Json(0);
+        }
+        #endregion
+
     }
 }

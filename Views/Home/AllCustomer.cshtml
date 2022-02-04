@@ -5,6 +5,7 @@
 }
 <link href="~/css/datatables.min.css" rel="stylesheet" />
 <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <h1>AllCustomer</h1>
 
 @if (ViewBag.SMessage != null)
@@ -81,7 +82,7 @@ else if (ViewBag.EMessage != null)
                     <input type="hidden" id="id" value="@item.CustomerId" />
                     <a asp-action="EditCustomer" asp-route-id="@item.CustomerId" class="btn btn-info btn-sm">Edit</a> |
                     <a asp-action="Customerdetail" asp-route-id="@item.CustomerId" class="btn btn-success btn-sm">Details</a> |
-                    <a href="#" data-toggle="#myModal" class="btn btn-danger btn-sm btndelete">remove</a>
+                    <a href="" data-toggle="#myModal" class="btn btn-danger btn-sm btndelete">remove</a>
                 </td>
             </tr>
         }
@@ -121,9 +122,9 @@ else if (ViewBag.EMessage != null)
 
     <script>
 
-        var ConfirmDelete = function (Id) {
+        var ConfirmDelete = function (id) {
 
-            $("#id").val(Id);
+            $("#myModal").modal('Show');
 
         }
 

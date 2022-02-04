@@ -31,7 +31,7 @@ else if (ViewBag.EMessage != null)
 
         <div class="row parentdiv">
             <div class="col-md-6">
-                @Html.DropDownList("CategoryId", AllProduct, "Choose an Product", new { @class = "form-control input-sm" })
+                @Html.DropDownList("ProductId", AllProduct, "Choose an Product", new { @class = "form-control input-sm" })
             </div>
             <div class="col-md-2">
                 <input type="number" step="any" id="Qty" value="1" class="form-control input-group-sm qty" />
@@ -65,7 +65,7 @@ else if (ViewBag.EMessage != null)
 <div class="anotherparentdiv" style="display:none;">
     <div class="row parentdiv mt-2">
         <div class="col-md-6">
-            @Html.DropDownList("CategoryId", AllProduct, "Choose an Product", new { @class = "form-control input-sm" })
+            @Html.DropDownList("ProductId", AllProduct, "Choose an Product", new { @class = "form-control input-sm" })
         </div>
         <div class="col-md-2">
             <input type="number" step="any" id="Qty" value="1" class="form-control input-group-sm qty" />
@@ -79,7 +79,7 @@ else if (ViewBag.EMessage != null)
     </div>
 </div>
 
-@section Scripts{
+@*@section Scripts{
     <script>
         $(document).on('change', ".qty,.price", function () {
             /*    $(".qty, .price,.totalprice").change(function () {*/
@@ -123,4 +123,4 @@ else if (ViewBag.EMessage != null)
         })
 
     </script>
-}
+}*@

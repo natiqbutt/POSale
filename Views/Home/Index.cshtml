@@ -1,7 +1,137 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@* Cards Start *@
+<div class="row">
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-muted">Total Customer</h5>
+                <div class="metric-value d-inline-block">
+                    <h1 class="mb-1 text-primary" id="CustCount"></h1>
+                </div>
+                <div class="metric-label d-inline-block float-right" style="color:#251f6d">
+                    <i class="fa fa-users fa-2x"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <h5>
+                    <a asp-controller="Home" asp-action="AllCustomer" class="text-primary text-center">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                </h5>
+            </div>
+        </div>
+    </div>
 
-<div class="dashboard-main-wrapper">
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-muted">Total Product</h5>
+                <div class="metric-value d-inline-block">
+                    <h1 class="mb-1 text-primary" id="ProCount"></h1>
+                </div>
+                <div class="metric-label d-inline-block float-right" style="color:#251f6d">
+                    <i class="fa fa-box-open fa-2x"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <h5>
+                    <a asp-controller="Product" asp-action="AllProducts" class="text-primary text-center">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                </h5>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-muted">Total Category</h5>
+                <div class="metric-value d-inline-block">
+                    <h1 class="mb-1 text-primary" id="CatCount"></h1>
+                </div>
+                <div class="metric-label d-inline-block float-right" style="color:#251f6d">
+                    <i class="fa fa-list fa-2x"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <h5>
+                    <a asp-controller="Category" asp-action="AllCategories" class="text-primary text-center">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-muted">Total Vendor</h5>
+                <div class="metric-value d-inline-block">
+                    <h1 class="mb-1 text-primary" id="VenCount"></h1>
+                </div>
+                <div class="metric-label d-inline-block float-right" style="color:#251f6d">
+                    <i class="fa fa-user fa-2x"></i>
+                </div>
+            </div>
+            <div class="card-footer">
+                <h5>
+                    <a href="" class="text-primary text-center">View Details<i class="fa fa-arrow-circle-right"></i></a>
+                </h5>
+            </div>
+        </div>
+    </div>
 </div>
+@* Cards End *@
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/Home/CustomerCount",
+                method: "GET",
+                success: function (Data) {
+
+                    $("#CustCount").html(Data);
+                },
+                error: function (response) {
+
+                }
+            });
+        });
+        $(document).ready(function () {
+            $.ajax({
+                url: "/Home/ProductCount",
+                method: "GET",
+                success: function (Data) {
+
+                    $("#ProCount").html(Data);
+                },
+                error: function (response) {
+
+                }
+            });
+        });
+        $(document).ready(function () {
+            $.ajax({
+                url: "/Home/CategoryCount",
+                method: "GET",
+                success: function (Data) {
+
+                    $("#CatCount").html(Data);
+                },
+                error: function (response) {
+
+                }
+            });
+        });
+        $(document).ready(function () {
+            $.ajax({
+                url: "/Home/VendorCount",
+                method: "GET",
+                success: function (Data) {
+
+                    $("#VenCount").html(Data);
+                },
+                error: function (response) {
+
+                }
+            });
+        });
+    </script>
+}
